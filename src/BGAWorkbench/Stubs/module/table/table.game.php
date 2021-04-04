@@ -270,12 +270,15 @@ abstract class Table extends APP_GameClass
     }
 
     /**
-     * @todo get from getCurrentPlayerId table load
+     * Get the current_player name.
+     *
+     * This method should only be used when in "multiplayer" state, and especially never in setupNewGame or zombieTurn methods.
+     *
      * @return string
      */
     protected function getCurrentPlayerName()
     {
-        return null;
+        return '';
     }
 
     /**
