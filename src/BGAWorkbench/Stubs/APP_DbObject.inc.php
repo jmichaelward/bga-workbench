@@ -100,6 +100,8 @@ class APP_DbObject extends APP_Object
     }
 
     /**
+     * Similar to self::getObjectFromDB, but raises an exception if no row is found.
+     *
      * @param string $sql
      * @return array
      * @throws BgaSystemException
@@ -107,8 +109,10 @@ class APP_DbObject extends APP_Object
     protected function getNonEmptyObjectFromDB($sql)
     {
         $rows = $this->getObjectListFromDB($sql);
-        if (count($rows) !== 1) {
-            throw new BgaSystemException('Expected exactly one result');
+        $count = count($rows);
+
+        if ($count !== 1) {
+            throw new BgaSystemException(__METHOD__ . " found {$count} results. One expected.");
         }
 
         return $rows[0];
