@@ -342,6 +342,19 @@ abstract class Table extends APP_GameClass
     }
 
     /**
+     * Get the color for the "active_player".
+     *
+     * @return string
+     */
+    public function getActivePlayerColor()
+    {
+        $player_id = self::getActivePlayerId();
+        $players   = self::loadPlayersBasicInfos();
+
+        return $players[$player_id]['player_color'] ?? '';
+    }
+
+    /**
      * @param int $activePlayerId
      * @return self
      */
