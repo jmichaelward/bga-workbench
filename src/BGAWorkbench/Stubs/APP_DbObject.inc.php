@@ -9,6 +9,12 @@ class APP_DbObject extends APP_Object
     private static $affectedRows = 0;
 
     /**
+     * Execute a query on the database..
+     *
+     * It can execute any type of SELECT/UPDATE/DELETE/REPLACE/INSERT query on the database.
+     *
+     * You should use it for write queries. For SELECT queries, use a specialized method.
+     *
      * @param string $sql
      * @return mysqli_result
      */
