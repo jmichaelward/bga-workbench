@@ -294,6 +294,16 @@ abstract class Table extends APP_GameClass
     }
 
     /**
+     * Check the "current_player" zombie status. If true, player is zombie (e.g., left or was kicked out of game).
+     *
+     * @return bool
+     */
+    protected function isCurrentPlayerZombie()
+    {
+        return false;
+    }
+
+    /**
      * @param int $currentPlayerId
      * @return self
      */
