@@ -88,17 +88,20 @@ class APP_DbObject extends APP_Object
     }
 
     /**
-     * @param string $sql
+     * Returns a unique value from the database or null if now value is found.
+     *
+     * @param string $sql SELECT query.
      * @return mixed
      */
     protected static function getUniqueValueFromDB($sql)
     {
-        // TODO: Throw exception if not unique
         $rows = self::getDbConnection()->fetchArray($sql);
-        if (count($rows) !== 1) {
+
+        if (count($rows) > 1) {
             throw new \RuntimeException('Non unique result');
         }
-        return $rows[0];
+
+        return $rows[0] ?? null;
     }
 
     /**
