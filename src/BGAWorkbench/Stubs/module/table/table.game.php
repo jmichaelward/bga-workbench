@@ -538,4 +538,26 @@ abstract class Table extends APP_GameClass
         );
         return array_combine($playerIds, $players);
     }
+
+    /**
+     * Save the whole game situation inside an "Undo save point".
+     *
+     * There is only one undo save point available. This cannot be used when either the current or next game state is
+     * multiactive.
+     *
+     * When called, this method raises a flag to store the database after the transaction is over.
+     */
+    protected function undoSavepoint()
+    {
+    }
+
+    /**
+     * Restore the situation previously saved as an undo save point.
+     *
+     * You must make sure that the active player is the same before and after the undoRestorePoint. e.g., it is your
+     * responsibility to check that the player is active is the same player that was active when undoSavepoint was called.
+     */
+    protected function undoRestorePoint()
+    {
+    }
 }
