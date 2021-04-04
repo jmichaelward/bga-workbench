@@ -97,6 +97,27 @@ class APP_DbObject extends APP_Object
     }
 
     /**
+     * Same as getCollectionFromDB, but raises an exception if the collection is non-empty.
+     *
+     * This method does not have a 2nd argument as the previous one does.
+     *
+     * @param string $sql The SQL query.
+     * @see APP_DbObject::getCollectionFromDB()
+     *
+     * @return array
+     */
+    protected function getNonEmptyCollectionFromDb($sql)
+    {
+        $result = self::getCollectionFromDB($sql);
+
+        if (empty($result)) {
+            throw new BgaSystemException('Requested collection is empty.');
+        }
+
+        return $result;
+    }
+
+    /**
      * Returns a unique value from the database or null if now value is found.
      *
      * @param string $sql SELECT query.
