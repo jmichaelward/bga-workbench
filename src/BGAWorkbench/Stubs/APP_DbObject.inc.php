@@ -42,17 +42,26 @@ class APP_DbObject extends APP_Object
     }
 
     /**
-     * @param string $sql
-     * @param boolean $bSingleValue
+     * Returns an associative array of rows for an database SELECT query.
+     *
+     * Array is indexed on the response is the first field specified in the SELECT query. Thus, if requesting a player ID,
+     * for instance, the key of each row will be the player's ID. Other keys will match the other values requested,
+     * e.g., 'id', 'name', 'score'.
+     *
+     * Resulting collection can be empty.
+     *
+     * @param string  $sql
+     * @param boolean $bSingleValue If true, method returns an associatve array of field A => field B.
      * @return array
      */
     protected function getCollectionFromDB($sql, $bSingleValue = false)
     {
-        $rows = self::getObjectListFromDB($sql);
-        $result = array();
+        $rows   = self::getObjectListFromDB($sql);
+        $result = [];
+
         foreach ($rows as $row) {
             if ($bSingleValue) {
-                $key = reset($row);
+                $key          = reset($row);
                 $result[$key] = next($row);
             } else {
                 $result[reset($row)] = $row;
