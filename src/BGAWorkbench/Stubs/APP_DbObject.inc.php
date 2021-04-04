@@ -90,9 +90,17 @@ class APP_DbObject extends APP_Object
     }
 
     /**
-     * @param string $sql
-     * @param boolean $bUniqueValue
+     * Return an array of rows for a database SELECT query.
+     *
+     * Result is the same as getCollectionFromDB except that it is an indexed, not associative, array.
+     *
+     * Result can be empty.
+     *
+     * @param string  $sql
+     * @param boolean $bUniqueValue If true, returns an indexed array of values in the order of the column fields requested.
+     * @see APP_DbObject::getCollectionFromDB()
      * @return array
+     *
      */
     protected static function getObjectListFromDB($sql, $bUniqueValue = false)
     {
