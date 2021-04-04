@@ -192,6 +192,10 @@ abstract class Table extends APP_GameClass
     public function giveExtraTime($player_id, $specific_time = null) {}
 
     /**
+     * Get the "active_player" name.
+     *
+     * Note: avoid using this method in "multiplayer" state because it does not mean anything.
+     *
      * @return string
      */
     public function getActivePlayerName()
@@ -330,6 +334,16 @@ abstract class Table extends APP_GameClass
     }
 
     /**
+     * Returns an associatve array with generic data about players (e.g., not game-specific data).
+     *
+     * array (
+     *     'player_id' => array(
+     *         'player_name' => '', // string: The name of the player,
+     *         'player_color' => '', // string: The color code of the player,
+     *         'player_no' => 0, // string: The position of the player at the start of the game in natural table order.
+     *     )
+     * )
+     *
      * @return array
      */
     public function loadPlayersBasicInfos()
