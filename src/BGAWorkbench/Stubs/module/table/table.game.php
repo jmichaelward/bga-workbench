@@ -52,6 +52,11 @@ class Gamestate
     }
 }
 
+/**
+ * Class Table
+ *
+ * @see https://en.doc.boardgamearena.com/Main_game_logic:_yourgamename.game.php
+ */
 abstract class Table extends APP_GameClass
 {
     /**
