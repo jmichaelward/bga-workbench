@@ -249,6 +249,16 @@ abstract class Table extends APP_GameClass
     }
 
     /**
+     * Get the "current_player".
+     *
+     * The current player is the one from which the action originated (sender of the request).
+     *
+     * The current player is not necessarily the active player. Generally, the active player is someone who is making
+     * a decision based on the actions of a player.
+     *
+     * Important: This method should only be used when in "multiplayer" state, and especially never in setupNewGame
+     * or zombieTurn methods.
+     *
      * @return int
      */
     protected function getCurrentPlayerId()
