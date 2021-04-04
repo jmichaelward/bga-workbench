@@ -4,6 +4,11 @@ use Doctrine\DBAL\Connection;
 
 class APP_DbObject extends APP_Object
 {
+    /**
+     * @var Connection
+     */
+    private static $connection;
+
     ////////////////////////////////////////////////////////////////////////
     // Testing methods
     private static $affectedRows = 0;
@@ -163,11 +168,6 @@ class APP_DbObject extends APP_Object
 
         return $rows[0] ?? null;
     }
-
-    /**
-     * @var Connection
-     */
-    private static $connection;
 
     /**
      * @param Connection $connection
