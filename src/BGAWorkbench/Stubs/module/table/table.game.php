@@ -304,6 +304,20 @@ abstract class Table extends APP_GameClass
     }
 
     /**
+     * Check the "current_player" spectator status.
+     *
+     * If true, the user accessing the game is a spectator (not part of the game). For this user, the interface should
+     * display all public information, and no private information (like a friend sitting at the same table as players
+     * and just spectating the game).
+     *
+     * @return bool
+     */
+    protected function isSpectator()
+    {
+        return false;
+    }
+
+    /**
      * @param int $currentPlayerId
      * @return self
      */
