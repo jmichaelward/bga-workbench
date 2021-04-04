@@ -34,20 +34,135 @@ class Gamestate
         $this->table_globals = [];
     }
 
-    public function setAllPlayersMultiactive()
+    /**
+     * Works like checkAction, but it does not check if the current player is also the active player.
+     *
+     * This method is rarely used, but is done specifically in certain game states when you want to authorize
+     * additional actions for players that are not active at the moment.
+     *
+     * Example: allowing players to change their mind about a card selection while other players are still thinking
+     * about their move.
+     *
+     * @param $action
+     */
+    public function checkPossibleAction($action)
     {
     }
 
+    /**
+     * Make a specific list of players active during a multiactive gamestate.
+     *
+     * This method sends an update notification to all players whose state has changed.
+     * @param array  $players    Array of player IDs.
+     * @param string $next_state The next state to transition into.
+     * @param false  $bExclusive Appends players to active list if false; replaces active players if true.
+     *
+     * @return bool True if state transition happened, false otherwise.
+     */
+    public function setPlayersMultiactive($players, $next_state, $bExclusive = false)
+    {
+    }
+
+    /**
+     * Makes a specified player inactive during a multiactive game state.
+     *
+     * Usually, you call this method during a multiactive game state after a player did their action. It is also possible
+     * to call it directly from a multiplayer action handler.
+     *
+     * If this player was the last active player, the method triggers the "next_state" transition.
+     *
+     * @param $player_id
+     * @param $next_state
+     *
+     * @return bool True if state transition happened, false otherwise.
+     */
     public function setPlayerNonMultiactive($player_id, $next_state)
     {
         return false;
     }
 
-    public function nextState($action = '')
+    /**
+     * Makes all playing players the active player and sends an update notification to each player.
+     *
+     * Triggers the onUpdateActionButtons callback.
+     *
+     * This method is typically used at the beginning of a game state which transitions to multipleactiveplayer, when
+     * multiple players have to perform some action. Do not use this method if you are going to make more changes
+     * in the active player list (e.g., if you want to take away multipleactiveplayer status immediately afterward,
+     * you would use setPlayersMultiactive instead).
+     */
+    public function setAllPlayersMultiactive()
     {
     }
 
+    /**
+     * All playing players are made inactive. Transition to the next state.
+     *
+     * @param $next_state
+     */
+    public function setAllPlayersNonMultiactive($next_state)
+    {
+    }
+
+    /**
+     * Change the current state to a new state.
+     *
+     * Important: $transition is the name of the transition, not the name of the target game state.
+     *
+     * @see https://en.doc.boardgamearena.com/Your_game_state_machine:_states.inc.php.
+     * @param string $transition Name of the transition.
+     */
+    public function nextState($transition = '')
+    {
+    }
+
+    /**
+     * Returns an associatve array of current game state attributes.
+     *
+     * @see https://en.doc.boardgamearena.com/Your_game_state_machine:_states.inc.php
+     * @return array
+     */
+    public function state()
+    {
+    }
+
+    /**
+     * Call this method to make any player active.
+     *
+     * Note: this method should only be called while in "game" state, not "activeplayer" or "multipleactiveplayer".
+     *
+     * @param int|string $player_id The ID of the player to activate.
+     */
     public function changeActivePlayer($player_id)
+    {
+    }
+
+    /**
+     * Retrieve the list of active players.
+     *
+     * This method can be called at any time, but will return different values depending on the game state.
+     *
+     * During "game", it will return a void array.
+     * During "activeplayer", it will return an array with a single value (the active player ID).
+     * During "multipleactiveplayer", it will return an array of all the active player IDs.
+     *
+     * It is best practice to only use this method during the multipleactiveplayer state.
+     */
+    public function getActivePlayerList()
+    {
+    }
+
+    /**
+     * Sends an update notification about multiplayer changes.
+     *
+     * All multiactive "set*" methods do this, however you must call this yourself if you want to change state manually
+     * using database queries for complex calculations.
+     *
+     * Do not call this method if using a different set* method.
+     *
+     * @param $next_state_if_none
+     */
+    public function updateMultiactiveOrNextState($next_state_if_none)
     {
     }
 }
@@ -110,7 +225,21 @@ abstract class Table extends APP_GameClass
     {
     }
 
+    /**
+     * Make the next player active in the natural player order.
+     *
+     * Note: this method should only be called in a "game" state, not "activeplayer" or "multipleactiveplayer".
+     */
     protected function activeNextPlayer()
+    {
+    }
+
+    /**
+     * Make the previous player active (in natural player order).
+     *
+     * Note: this method should only be called in a "game" state, not "activeplayer" or "multipleactiveplayer".
+     */
+    protected function activePrevPlayer()
     {
     }
 
