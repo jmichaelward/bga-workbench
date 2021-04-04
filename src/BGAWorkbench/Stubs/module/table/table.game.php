@@ -64,6 +64,29 @@ abstract class Table extends APP_GameClass
      */
     public $gamestate;
 
+	/**
+	 * ID of the current player.
+	 *
+	 * @var int
+	 */
+	private $currentPlayerId;
+
+	/**
+	 * ID of the active player.
+	 *
+	 * @var int
+	 */
+	private $activePlayerId;
+
+	/**
+	 * @var array
+	 */
+	private $notifications = [];
+
+
+    /**
+     * Table constructor.
+     */
     public function __construct()
     {
         $this->gamestate = new Gamestate();
@@ -180,11 +203,6 @@ abstract class Table extends APP_GameClass
     ////////////////////////////////////////////////////////////////////////
     // Testing methods
     /**
-     * @var array[]
-     */
-    private $notifications = [];
-
-    /**
      * @return array[]
      */
     public function getNotifications()
@@ -227,11 +245,6 @@ abstract class Table extends APP_GameClass
     }
 
     /**
-     * @var int
-     */
-    private $currentPlayerId;
-
-    /**
      * @return int
      */
     protected function getCurrentPlayerId()
@@ -271,11 +284,12 @@ abstract class Table extends APP_GameClass
     }
 
     /**
-     * @var int
-     */
-    private $activePlayerId;
-
-    /**
+     * Get the "active_player", whatever what is the current state type.
+     *
+     * Note: it does not mean that this player is active right now. Depends on the current state.
+     *       Current state could be something else like "game" or "multiplayer".
+     * Note: avoid using this method while in "multiplayer" state.
+     *
      * @return int
      */
     public function getActivePlayerId()
