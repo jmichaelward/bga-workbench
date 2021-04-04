@@ -170,6 +170,44 @@ class APP_DbObject extends APP_Object
     }
 
     /**
+     * Returns an associative array of associative arrays from a database SELECT query.
+     *
+     * The first array level corresponds to the first column specified in the query.
+     * The second array level corresponds to the second column specified in the query.
+     *
+     * @param string $sql          The database SELECT query.
+     * @param false  $bSingleValue If true, keep only the third column on the result.
+     */
+    protected function getDoubleKeyCollectionFromDb($sql, $bSingleValue = false)
+    {
+    }
+
+    /**
+     * Return the primary key of the last inserted row.
+     *
+     * @see mysql_insert_id()
+     * @return mixed
+     */
+    protected function DbGetLastId()
+    {
+    }
+
+    /**
+     * You must use this function on every string type data in your database that contains player-modified data.
+     *
+     * Note: if you are using standard types in ajax actions, like AT_alphanum, it is sanitized before arrival.
+     *
+     * This is only needed if you manage to get an unchecked string, like in games where a user has to enter text as a
+     * response.
+     *
+     * @param $string
+     */
+    protected function escapeStringForDB($string)
+    {
+    }
+
+
+    /**
      * @param Connection $connection
      */
     public static function setDbConnection(Connection $connection)
