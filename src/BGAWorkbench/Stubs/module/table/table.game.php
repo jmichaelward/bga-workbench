@@ -282,12 +282,15 @@ abstract class Table extends APP_GameClass
     }
 
     /**
-     * @todo get from getCurrentPlayerId table load
+     * Get the "current_player" color.
+     *
+     * This method should only be used when in "multiplayer" state, and especially never in setupNewGame or zombieTurn methods.
+     *
      * @return string
      */
     protected function getCurrentPlayerColor()
     {
-        return null;
+        return '';
     }
 
     /**
