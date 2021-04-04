@@ -72,6 +72,24 @@ class APP_DbObject extends APP_Object
     }
 
     /**
+     * Returns one row for the SQL SELECT query as an associatve array, or null if there is no result.
+     *
+     * Raises an exception if the query return is more than one row.
+     *
+     * As with APP_DbObject::getCollectionFromDb(), the associative array is indexed on the first value requested.
+     *
+     * @param string $sql The database SELECT query.
+     * @throws BgaSystemException If more than 1 result is found.
+     *
+     * @return array|null
+     */
+    protected function getObjectFromDB($sql)
+    {
+        // @TODO Figure out how to stub this one.
+        return array();
+    }
+
+    /**
      * @param string $sql
      * @param boolean $bUniqueValue
      * @return array
