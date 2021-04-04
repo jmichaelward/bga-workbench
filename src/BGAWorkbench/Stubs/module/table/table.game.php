@@ -560,4 +560,13 @@ abstract class Table extends APP_GameClass
     protected function undoRestorePoint()
     {
     }
+
+    /**
+     * Translate a string of text.
+     *
+     * @param string $text The string of text to translate.
+     */
+    protected function _($text)
+    {
+    }
 }
