@@ -83,6 +83,10 @@ abstract class Table extends APP_GameClass
 	 */
 	private $notifications = [];
 
+    /**
+     * @var array|null
+     */
+    private static $stubbedGameInfos;
 
     /**
      * Table constructor.
@@ -363,11 +367,6 @@ abstract class Table extends APP_GameClass
         $this->activePlayerId = $activePlayerId;
         return $this;
     }
-
-    /**
-     * @var array|null
-     */
-    private static $stubbedGameInfos = null;
 
     /**
      * @param array $gameInfos
